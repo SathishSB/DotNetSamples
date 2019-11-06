@@ -1,1 +1,2 @@
-This is git repo
+This is git repo message 1
+This is git repo message 2
