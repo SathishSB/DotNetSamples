@@ -4,3 +4,4 @@ Edit the text1
 Edit the text2
 Edit the text3
 Edit the text4
+Edit the textMerge1
