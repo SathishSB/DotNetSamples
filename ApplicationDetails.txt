@@ -1,6 +1,6 @@
 This is git repo message 1
 
-This is git repo message 2
+This is git repo message 2 - git edit for merge
 
 This is git repo message 3
 
