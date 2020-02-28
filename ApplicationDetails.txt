@@ -10,6 +10,6 @@ This is git repo message 5
 
 This is git repo message Branch-1
 
-This is git repo message Branch-2
+This is git repo message Branch-1
 
-This is git repo message Branch-3
+This is git repo message Branch-1
