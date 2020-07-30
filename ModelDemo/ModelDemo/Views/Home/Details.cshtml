@@ -1,0 +1,59 @@
+﻿@model ModelDemo.Models.Employe
+
+@{
+   ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <table id:"Details" style:"font-variant">
+            <tr>
+                <td>
+                    Employe Id :
+                </td>
+                <td>
+                    @model.empId;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe First Name :
+            </td>
+            <td>
+                @model.fName;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe Last Name :
+            </td>
+            <td>
+                @model.lName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe City :
+            </td>
+            <td>
+                @model.city
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe State :
+            </td>
+            <td>
+                @model.state
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

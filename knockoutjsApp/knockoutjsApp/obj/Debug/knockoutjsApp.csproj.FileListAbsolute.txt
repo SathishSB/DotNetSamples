@@ -1,0 +1,5 @@
+F:\Sathish\MSDotNet\Scripting\knockout\knockoutjsApp\knockoutjsApp\bin\knockoutjsApp.dll.config
+F:\Sathish\MSDotNet\Scripting\knockout\knockoutjsApp\knockoutjsApp\bin\knockoutjsApp.dll
+F:\Sathish\MSDotNet\Scripting\knockout\knockoutjsApp\knockoutjsApp\bin\knockoutjsApp.pdb
+F:\Sathish\MSDotNet\Scripting\knockout\knockoutjsApp\knockoutjsApp\obj\Debug\knockoutjsApp.dll
+F:\Sathish\MSDotNet\Scripting\knockout\knockoutjsApp\knockoutjsApp\obj\Debug\knockoutjsApp.pdb

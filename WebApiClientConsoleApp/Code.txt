@@ -1,0 +1,142 @@
+ //WebRequest request = WebRequest.Create("http://localhost:50641/api/Calculate/AddPrefix");
+                //request.Method = "POST";
+                
+                //request.ContentLength = 10;
+                                                         
+                //string postData = "Sathish";
+                //request.UseDefaultCredentials = true;
+
+                //byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+                //request.ContentType = "application/x-www-form-urlencoded";
+                //request.ContentLength = byteArray.Length;
+                //Stream dataStream = request.GetRequestStream();
+                //dataStream.Write(byteArray, 0, byteArray.Length);
+                ////request.Credentials = CredentialCache.DefaultCredentials;
+                ////((HttpWebRequest)request).UserAgent = ".NET Framework Example Client";   
+                //dataStream.Close();
+                //WebResponse response = request.GetResponse();
+            
+                //Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+                //dataStream = response.GetResponseStream();
+                //StreamReader reader = new StreamReader(dataStream);
+                //string responseFromServer = reader.ReadToEnd();
+                //Console.WriteLine(responseFromServer);
+                //reader.Close();
+                //dataStream.Close();
+                //response.Close();
+                //Console.ReadKey();
+
+                //string EmpName = "Sathish";
+                //string reqUrl = "http://localhost:50641/api/Calculate/AddPrefix";
+                //string postString = string.Format("str={0}", EmpName);
+
+                //const string contentType = "application/x-www-form-urlencoded";
+                //System.Net.ServicePointManager.Expect100Continue = false;
+
+                //CookieContainer cookies = new CookieContainer();
+                //HttpWebRequest webRequest = WebRequest.Create(reqUrl) as HttpWebRequest;
+                //webRequest.Method = "POST";
+                //webRequest.ContentType = contentType;
+                //webRequest.CookieContainer = cookies;
+                //webRequest.ContentLength = postString.Length;
+                //webRequest.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1";
+                //webRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+ 
+              
+                //StreamWriter requestWriter = new StreamWriter(webRequest.GetRequestStream());
+                //requestWriter.Write(postString);
+                //requestWriter.Close();
+
+                //StreamReader responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
+                //string responseData = responseReader.ReadToEnd();
+
+                //responseReader.Close();
+
+                string reqUrl = "http://localhost:50641/api/Calculate/AddPrefix";
+                HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(reqUrl);
+                myHttpWebRequest.Method = "POST";
+
+
+                string postData = "str=" + "Sathish";
+                myHttpWebRequest.ContentType = "application/x-www-form-urlencoded";
+
+
+
+                StreamWriter newStream =  new StreamWriter(myHttpWebRequest.GetRequestStream());
+
+                newStream.Write(postData);
+                Console.WriteLine("The value of 'ContentLength' property after sending the data is {0}", myHttpWebRequest.ContentLength);
+
+                // Close the Stream object.
+                newStream.Close();
+
+                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+                Stream responseStream = myHttpWebResponse.GetResponseStream();
+                StreamReader myStreamReader = new StreamReader(responseStream, Encoding.Default);
+                string pageContent = myStreamReader.ReadToEnd();
+
+                myStreamReader.Close();
+                responseStream.Close();
+
+                myHttpWebResponse.Close();
+                Console.WriteLine(pageContent);
+
+
+
+
+
+//static void Main(string[] args)
+//{
+//    PostAString();
+
+//    using (var client = new HttpClient())
+//    {
+//        client.BaseAddress = new Uri("http://localhost:56515/");
+//        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+//        RunAsync(client).Wait();                   
+//        Console.ReadKey();
+//    }
+//}
+
+//static async Task RunAsync(HttpClient client)
+//{
+//    HttpResponseMessage response = client.GetAsync("api/Calculate/AddTwoNembers").Result;
+//    if (response.IsSuccessStatusCode)
+//    {
+//        //List<Employee> empData = response.Content.ReadAsAsync<IEnumerable<Employee>>().Result.ToList();
+//        //foreach (var e in empData)
+//        //{
+//        //    DisplayEmployeeDetails(e);
+//        //}
+//    }
+//    else
+//    {
+//      //  DisplayErrorMessage("Error Code" + response.StatusCode + " : Message - " + response.ReasonPhrase);
+//    }
+//}
+
+//public static void postMethod()
+//{
+//    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:49032/api/test");
+//    request.Method = "POST";
+//    string postData = "Short test...";
+//    byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+//    request.ContentType = "application/x-www-form-urlencoded";
+//    request.ContentLength = byteArray.Length;
+
+//    Stream dataStream = request.GetRequestStream();
+//    dataStream.Write(byteArray, 0, byteArray.Length);
+//    dataStream.Close();
+
+//    WebResponse response = request.GetResponse();
+//    Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+//    dataStream = response.GetResponseStream();
+
+//    StreamReader reader = new StreamReader(dataStream);
+//    string responseFromServer = reader.ReadToEnd();
+//    Console.WriteLine(responseFromServer);
+//    reader.Close();
+//    dataStream.Close();
+//    response.Close();
+//    Console.ReadLine();
+//}

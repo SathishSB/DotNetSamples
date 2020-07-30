@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Bindings";
+}
+
+@*@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>More information</title>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+</html>*@
+
+
+
+<div>
+
+    @*<b># The visible binding</b>
+    <div data-bind="visible: shouldShowMessage">
+        <p>You will see this message only when "shouldShowMessage" holds a true value.</p>
+    </div>
+
+    <b># The text binding</b>
+    <div data-bind="visible: myValues().length > 3">
+        <p>You will see this message only when 'myValues' has at least one member.<p>
+        <p>Today's message is: <span data-bind="text: myMessage"></span></p>
+    </div>
+
+    <b># The html binding</b>
+    <div data-bind="html: details"></div>
+
+    <b>#The css binding </b>
+    <div data-bind="css: { profitWarning: currentProfit() < 0 }"> Profit Information </div>
+    <div data-bind="css: { profitWarning: currentProfit() < 0, majorHighlight: isSevere }"> </div>
+    <div data-bind="css: { profitWarning: currentProfit() < 0, 'majorhighlight': isSevere }"> </div>
+
+    <div data-bind="style: { color: currentProfit() < 0 ? 'red' : 'black' }">Profit Information</div>
+
+    <div data-bind="attr: { href: url, title: details }">
+        Report
+    </div>
+    <b># Control flow </b>*@
+   
+    @*------------------------------------------------*@
+    
+    <b># Working with form fields </b>
+
+    <div>
+        <button data-bind="click: incrementClickCounter">Click me</button>
+        You've clicked <span data-bind="text: numberOfClicks"></span> times.        
+    </div>
+
+    <ul data-bind="foreach: places">
+        <li>
+            <span data-bind="text: $data"></span>
+            <button data-bind="click: $parent.removePlace">Remove</button>
+        </li>
+    </ul>
+
+    <button data-bind="click: myFunction">
+        Click me
+    </button>
+
+</div>
+
+@section scripts
+{   
+    <script type='text/javascript'>
+        // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+        function AppViewModel() {
+
+            var self = this;
+            //self.shouldShowMessage = ko.observable(true) // Message initially visible
+
+            //self.myValues = ko.observableArray([]) // Initially empty, so message hidden
+            //self.myValues().push("java script", ".Net", "c#", "F#");
+
+            //self.myMessage = ko.observable("Hello, world!"); // Text appears
+
+            ////TODO
+            //self.details = ko.observable(); // Initially blank
+            //self.details("<em>For further details, view the report <a href='Form.html'>here</a>.</em>"); // HTML content appears
+
+            
+            //self.currentProfit = ko.observable(-5);
+            //self.profitStatus = ko.pureComputed(function () {
+            //    return self.currentProfit() < 0 ? "profitWarning" : "profitPositive";
+            //});
+
+            //self.currentProfit = ko.observable(-50); // Positive value, so initially black
+
+            //self.url = ko.observable("google.com");
+            //self.details = ko.observable("Report including final year-end statistics");
+            //
+
+            self.numberOfClicks = ko.observable(23);
+            self.incrementClickCounter = function () {
+                var previouscount = self.numberOfClicks;
+                // self.numberOfClicks(previousCount + 1);     
+                alert(previousCount + 1);                
+            }           
+
+            self.places = ko.observableArray(['London', 'Paris', 'Tokyo']);
+
+            // The current item will be passed as the first parameter, so we know which place to remove
+            self.removePlace = function (place) {
+                self.places.remove(place)
+            }
+
+            myFunction =  function(data, event) {
+                if (event.shiftKey) {
+                    alert("shift Key");
+                } else {
+                    alert("normal key");
+                }
+            }
+        };
+
+        // Activates knockout.js
+        ko.applyBindings(new AppViewModel());
+    </script>>
+}

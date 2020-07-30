@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "3.Working with form fields";
+}
+<h4><b>@ViewBag.Title</b></h4>
+
+<div class="jumbotron">
+   <p><b>#  The "click" binding</b></p>
+
+    <div>
+        You've clicked <span data-bind="text: numberOfClicks"></span> times
+        <button data-bind="click: incrementClickCounter">Click me</button>
+    </div>
+
+</div>
+@section Scripts
+{
+<script type="text/javascript">
+    function AppViewModel() {
+        self = this;
+        self.numberOfClicks = ko.observable(0);
+        incrementClickCounter = function() {
+            self.previousCount = self.numberOfClicks();
+            self.numberOfClicks(self.previousCount + 1);}
+    };
+
+    // Activates knockout.js
+    ko.applyBindings(new AppViewModel());
+   </script>
+}

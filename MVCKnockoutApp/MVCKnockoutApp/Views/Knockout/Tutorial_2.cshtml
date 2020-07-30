@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "2.Control flow";
+}
+<h4><b>@ViewBag.Title</b></h4>
+
+<div class="jumbotron">
+    <p><b> # The "foreach" binding </b></p>
+    <table>
+        <thead>
+            <tr><th>FirstName</th><th>LastName</th></tr>
+        </thead>
+        <tbody data-bind="foreach: peopleList">
+            <tr>
+                <td data-bind="text: firstName"></td>
+                <td data-bind="text: lastName"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>People</h4>
+    <ul data-bind="foreach: people">
+        <li>
+            Name at position <span data-bind="text: $index"> </span>:
+            <span data-bind="text: name"> </span>
+            <a href="#" data-bind="click: removePerson">Remove</a>
+        </li>
+    </ul>
+    <button data-bind="click: addPerson">Add</button>
+
+    <ul data-bind="foreach: months">
+        <li>
+            The current item is: <b data-bind="text: $data"></b>
+        </li>
+    </ul>
+
+    <ul data-bind="foreach: { data: categories, as: 'category' }">
+        <li>
+            <ul data-bind="foreach: { data: items, as: 'item' }">
+                <li>
+                    <span data-bind="text: category.name"></span>:
+                    <span data-bind="text: item"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <ul data-bind="foreach: { data: myItems, afterAdd: yellowFadeIn }">
+        <li data-bind="text: $data"></li>
+    </ul>
+
+    <button data-bind="click: addItem">Add</button>
+
+    <p><b> # The "if" binding </b></p>
+
+    <label><input type="checkbox" data-bind="checked: displayMessage" /> Display message</label>
+    <div data-bind="if: displayMessage">Here is a message. Astonishing.</div>
+
+    <ul data-bind="foreach: planets">
+        <li>
+            Planet : <b data-bind="text: name"> </b>
+            <div data-bind="if: capital">
+                Capital : <b data-bind="text: capital.cityName"> </b>
+            </div>
+        </li>
+    </ul>
+
+    <p><b> # The "ifnot" binding </b></p>
+
+    <label><input type="checkbox" data-bind="checked: displayMessage" /> Display message</label>
+    <div data-bind="if: !displayMessage()">Here is a message. Astonishing.</div>
+    <div data-bind="ifnot: displayMessage">Here is a message. Astonishing.</div>
+
+    <b data-bind="text: city"> </b>
+    <p data-bind="with: coords">    
+        Latitude: <span data-bind="text: latitude"> </span>,
+        Longitude: <span data-bind="text: longitude"> </span>
+    </p>
+    
+    <form data-bind="submit: getTweets">
+        Twitter account:
+        <input data-bind="value: twitterName" />
+        <button type="submit">Get tweets</button>
+    </form>
+    <div data-bind="with: resultData">
+        <h3>Recent tweets fetched at <span data-bind="text: retrievalDate"> </span></h3>
+        <ol data-bind="foreach: topTweets">
+            <li data-bind="text: text"></li>
+        </ol>
+
+        <button data-bind="click: clearResults">Clear tweets</button>
+    </div>
+
+    @*TODO*@
+    <p><b> # The "component" binding </b></p>
+
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function AppViewModel() {
+            self = this;
+            self.peopleList = [{ firstName: 'Bert', lastName: 'Bertington' },
+                               { firstName: 'Charles', lastName: 'Charlesforth' },
+                               { firstName: 'Denise', lastName: 'Dentiste' }]
+
+            self.people = ko.observableArray([{ name: 'Bert' },
+                                              { name: 'Charles' },
+                                              { name: 'Denise' }]);
+
+            self.addPerson = function () {
+                self.people.push({ name: "New at " + new Date() });
+            };
+
+            self.removePerson = function () {
+                self.people.remove(this);
+            }
+
+            months = ['Jan', 'Feb', 'Mar', 'etc'];
+
+            categories = ko.observableArray([{ name: 'Fruit', items: ['Apple', 'Orange', 'Banana'] },
+                                            { name: 'Vegetables', items: ['Celery', 'Corn', 'Spinach'] }])
+
+            myItems = ko.observableArray(['A', 'B', 'C']);
+            yellowFadeIn = function(element, index, data) {
+                $(element).filter("li")
+                          .animate({ backgroundColor: 'yellow' }, 200)
+                          .animate({ backgroundColor: 'white' }, 800);
+            },
+            addItem = function () { this.myItems.push('New item'); }
+
+            displayMessage = ko.observable(true)
+
+            planets = [{ name: 'Mercury', capital: null },
+                       { name: 'Earth', capital: { cityName: 'Barnsley' } }]
+
+            city = "London",
+            coords = { latitude: 51.5001524, longitude: -0.1262362 }
+
+            self.twitterName = ko.observable("example");
+            self.resultData = ko.observable(); // No initial value
+
+            self.getTweets = function () {
+                var name = self.twitterName(),
+                    simulatedResults = [{ text: name + ' What a nice day.' },
+                                        { text: name + ' Building some cool apps.' },
+                                        { text: name + ' Just saw a famous celebrity eating lard. Yum.' }]
+
+                self.resultData({ retrievalDate: new Date(), topTweets: simulatedResults });
+            }
+
+            self.clearResults = function () {self.resultData(undefined)}
+
+        };
+        ko.applyBindings(AppViewModel());
+    </script>
+}

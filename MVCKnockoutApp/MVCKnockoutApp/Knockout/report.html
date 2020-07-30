@@ -1,0 +1,24 @@
+<html>
+<script type='text/javascript' src='F:\Sathish\MSDotNet\Scripting\Knockout\MVCKnockoutApp\MVCKnockoutApp\Scripts\knockout-3.2.0.js'></script>
+<script type='text/javascript' src='F:\Sathish\MSDotNet\Scripting\Knockout\MVCKnockoutApp\MVCKnockoutApp\Scripts\knockout-3.2.0.debug.js'></script>
+<script type='text/javascript'>
+    // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+    function AppViewModel() {
+        this.firstName = ko.observable();
+        this.lastName = ko.observable();
+
+        this.capitalizeLastName = function () {
+            var currentVal = this.lastName();        // Read the current value
+            this.lastName(currentVal.toUpperCase()); // Write back a modified value
+        };
+    }
+    // Activates knockout.js
+    ko.applyBindings(new AppViewModel());
+</script>
+<h2>Knockout JS </h2>
+        <p>First name: <span data-bind="text: firstName"></span></p>
+        <p>Last name: <span data-bind="text: lastName"></span></p>
+        <p>First name: <input data-bind="value: firstName" /></p>
+        <p>Last name: <input data-bind="value: lastName" /></p>
+        <p><Button data-bind="click: capitalizeLastName"/>Go caps &raquo;</p>
+</html>

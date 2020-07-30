@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "1.Controlling text and appearance";
+}
+<h4><b>@ViewBag.Title</b></h4>
+
+<div class="jumbotron">
+    <p><b> # The 'visible' binding</b></p>
+    <div data-bind="visible: shouldShowMessage">You will see this message only when "shouldShowMessage" holds a true value.</div>
+    <div data-bind="visible: myValues().length > 0">You will see this message only when 'myValues' has at least one member.</div>
+
+    <p><b> # The 'text' binding</b></p>
+    <p> Today's message is <span data-bind="text: myMessage"></span></p>
+    <p> The item is <span data-bind="text: price"></span> /- today.</p>
+    <p> The item is <span data-bind="text: priceRating"></span> today.</p>
+    <p> The item is <span data-bind="text: price() > 50 ? 'expensive' : 'affordable'"></span> today.</p>
+    <p> Today's message is (html tags) <span data-bind="html: myMessageHtml"></span></p>
+
+    <p><b> # The "html" binding</b></p>
+    <div data-bind="html: details"></div>
+
+    <p><b> # The "css" binding</b></p>
+    <div data-bind="css: { profitWarning: currentProfit() < 0 }">Profit Information</div>
+    <div data-bind="css: profitStatus">Profit Information</div>
+
+    <p><b> # The "style" binding</b></p>
+    <div data-bind="style: { color: currentProfit() < 0 ? 'red' : 'black' }">Profit Information</div>
+    <div data-bind="text: currentProfitStyle()"></div>
+
+    <p><b> # The "attr" binding</b></p>
+    <a data-bind="attr: { href: url, title: details }">Report</a>
+
+</div>
+
+ @section scripts
+{
+        <script type='text/javascript'>
+            // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+            function AppViewModel() {
+                self = this;
+                self.shouldShowMessage = ko.observable(true)  // true to visible and false to invisible
+
+                myValues = ko.observableArray([])
+                myValues.push("some value")
+
+                myMessage = ko.observable()
+                myMessage("Hello, world!");
+
+                price = ko.observable(64)
+                //TODO
+                priceRating = ko.pureComputed(function () {
+                    return self.price > 50 ? 'expensiv' : 'affordable';
+                });
+
+                //TODO
+                myMessageHtml = ko.observable()
+                myMessageHtml('<i>Hello, world!</i>');
+
+                details = ko.observable()
+                details("<em>For further details, view the report <a href='report.html'>here</a>.</em>"); // HTML content appears
+
+                //TODO
+                currentProfit = ko.observable(150000)
+                // currentProfit(-50);
+                profitStatus = ko.pureComputed(function () {
+                    return self.currentProfit() < 0 ? "profitWarning" : "profitPositive";
+                });
+
+                //TODO
+                self.currentProfitStyle = ko.observable()
+                self.currentProfitStyle(150000);
+
+                url = ko.observable("year-end.html")
+                details = ko.observable("Report including final year-end statistics")
+            };
+
+            // Activates knockout.js
+            ko.applyBindings(new AppViewModel());
+        </script>
+ }

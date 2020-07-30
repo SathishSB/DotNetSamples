@@ -1,0 +1,7 @@
+F:\Sathish\Dell\ServiceBus\AzureServiceBusApp\AzureServiceBusApp\bin\Debug\AzureServiceBusApp.exe.config
+F:\Sathish\Dell\ServiceBus\AzureServiceBusApp\AzureServiceBusApp\bin\Debug\AzureServiceBusApp.exe
+F:\Sathish\Dell\ServiceBus\AzureServiceBusApp\AzureServiceBusApp\bin\Debug\AzureServiceBusApp.pdb
+F:\Sathish\Dell\ServiceBus\AzureServiceBusApp\AzureServiceBusApp\bin\Debug\Microsoft.ServiceBus.dll
+F:\Sathish\Dell\ServiceBus\AzureServiceBusApp\AzureServiceBusApp\bin\Debug\Microsoft.ServiceBus.xml
+F:\Sathish\Dell\ServiceBus\AzureServiceBusApp\AzureServiceBusApp\obj\Debug\AzureServiceBusApp.exe
+F:\Sathish\Dell\ServiceBus\AzureServiceBusApp\AzureServiceBusApp\obj\Debug\AzureServiceBusApp.pdb

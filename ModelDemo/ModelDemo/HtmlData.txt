@@ -1,0 +1,66 @@
+﻿@Model 
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<h1>Employe Details</h1>
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <tr>
+            <td>
+                Employe Id :
+            </td>
+            <td>
+                @model.empId
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe First Name :
+            </td>
+            <td>
+                @model.fName;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe Last Name :
+            </td>
+            <td>
+                @model.lName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe City :
+            </td>
+            <td>
+                @model.city
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Employe State :
+            </td>
+            <td>
+                @model.state
+            </td>
+        </tr>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿@using EmployeeMaintenance.Models;
+@model IEnumerable<Employee>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css {
+}
+
+<h2>Employee List</h2>
+<div>
+    @Html.ActionLink("Index", "Index", "Home")
+</div>
+
+<div>
+    <table class="table table-bordered table-condensed">
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>jQuery AJAX</th>
+        </tr>
+        @foreach (Employee emp in Model)
+        {
+            <tr id="tr@(emp.EmployeeId)">
+                <td>
+                    @Html.ActionLink(String.Format("{0} {1}", emp.FirstName, emp.LastName), "Details", new { id = emp.EmployeeId })
+                </td>
+                <td>
+                    @emp.Department.DepartmentName
+                </td>
+                <td>
+                    <a class="details" id="@emp.EmployeeId" href="#">Details</a> |
+                    <a class="delete" id="@emp.EmployeeId" href="#">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div id="details">
+
+</div>
+@section scripts {
+<script type="text/javascript">
+$(document).ready(function () {
+$('a.delete').click(function () {
+    var id = $(this).attr("id");
+    $.ajax({
+        url: '/employee/delete', 
+		type: "POST", 
+		dataType: "text",
+        data: { id: id },
+        success: function (data) {                       
+            $('#tr' + id).html(data);
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+            alert(status);
+            alert(error);
+        }
+    });
+});
+			
+$('a.details').click(function () {
+    var id = $(this).attr("id");
+    $.ajax({
+             url: '/employee/detailasjson', type: "GET", dataType: "json",
+             data: {id:id},
+             success: function (data) {
+				content = "<h3>Employee Detail</h3>";
+				content += "<dl class=\"dl-horizontal\">";
+				content += "<dt>First Name</dt><dd>" + data.FirstName + "</dd>";
+				content += "<dt>Last Name</dt><dd>" + data.LastName + "</dd>";
+				content += "<dt>Address1</dt><dd>" + data.Address1 + "</dd>";
+				content += "<dt>Address2</dt><dd>" + data.Address2 + "</dd>";
+				content += "<dt>City</dt><dd>" + data.City + "</dd>";
+				content += "<dt>State</dt><dd>" + data.State + "</dd>";
+				content += "<dt>Country </dt><dd>" + data.Country + "</dd>";
+				content += "<dt>PostalCode</dt><dd>" + data.PostalCode + "</dd>";
+				content += "<dt>Email </dt><dd>" + data.Email + "</dd>";
+				content += "<dt>DOB </dt><dd>" + data.DOB + "</dd>";
+				content += "<dt>Gender </dt><dd>" + data.Gender + "</dd>";
+				content += "<dt>IsPermanent </dt><dd>" + data.IsPermanent + "</dd>";
+				content += "<dt>Salary </dt><dd>" + data.Salary + "</dd>";
+				content += " </dl>";
+				$('#details').html(content);
+			},
+			error: function (xhr, status, error) {
+				alert(xhr.responseText);
+				alert(status);
+				alert(error);                        
+			}
+		});
+    });
+});
+}
